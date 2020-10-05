@@ -25,11 +25,8 @@
     <!-- End Top Bar -->
 
     <br>
-    
-    
-    
+
 @yield('content')
-    
 
     <div class="row column">
       <hr>

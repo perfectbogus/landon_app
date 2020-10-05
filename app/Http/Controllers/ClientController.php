@@ -55,9 +55,9 @@ class ClientController extends Controller
 
         if ($request->isMethod('post')) {
             $this->validate(
-                request,
+                $request,
                 [
-                    'name' => 'required',
+                    'name' => 'required|min:5',
                     'last_name' => 'required',
                     'address' => 'required',
                     'zip_code' => 'required',
