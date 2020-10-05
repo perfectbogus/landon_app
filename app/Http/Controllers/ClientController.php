@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Title as Title;
+use Illuminate\Http\Request;
 
 class ClientController extends Controller
 {
@@ -48,10 +49,27 @@ class ClientController extends Controller
         $data['zip_code'] = $request->input('zip_code');
         $data['city'] = $request->input('city');
         $data['state'] = $request->input('state');
-        $data['email'] = $request->input('email  ');
+        $data['email'] = $request->input('email');
         $data['titles'] = $this->titles;
         $data['modify'] = 0;
-        return view('client.form', $data);
+
+        if ($request->isMethod('post')) {
+            $this->validate(
+                request,
+                [
+                    'name' => 'required',
+                    'last_name' => 'required',
+                    'address' => 'required',
+                    'zip_code' => 'required',
+                    'city' => 'required',
+                    'state' => 'required',
+                    'email' => 'required',
+                ]
+            );
+            return redirect('clients');
+        } else {
+            return view('client.form', $data);
+        }
     }
 
     public function create()
