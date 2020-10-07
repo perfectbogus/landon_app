@@ -14,13 +14,14 @@ class Room extends Model
             ->select('r.id', 'r.name')
         ->whereRaw("
             r.id NOT IN(
-                select b.room_id from reservations b
-                where NOT(
+                SELECT b.room_id FROM reservations b
+                WHERE NOT(
                     b.date_out < '{$start_date}' OR 
                     b.date_in > '{$end_date}'   
                 )
             )
         ")->orderBy('r.id')
         ->get();
+        return $available_rooms;
     }
 }
