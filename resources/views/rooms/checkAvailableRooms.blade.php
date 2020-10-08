@@ -15,10 +15,13 @@
             <form action="" method="post">
                 <div class="medium-1  columns">FROM:</div>
                 <div class="medium-2  columns"><input name="dateFrom" value="{{ $dateFrom }}" type="text"
-                                                      class="datepicker"/></div>
+                                                      class="datepicker"/>
+                <small class="error"> {{ $errors->first('dateFrom') }}</small>
+                </div>
                 <div class="medium-1  columns">TO:</div>
                 <div class="medium-2  columns"><input name="dateTo" value="{{ $dateTo }}" type="text"
                                                       class="datepicker"/></div>
+                <small class="error"> {{ $errors->first('dateFrom') }}</small>
                 <div class="medium-2  columns"><input class="button" type="submit" value="SEARCH"/></div>
             </form>
 

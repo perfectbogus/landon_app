@@ -20,6 +20,14 @@ class RoomsController extends Controller
             $dateTo = '';
             $data['rooms'] = [];
         } else {
+            $this->validate(
+                $request,
+                [
+                    'dateFrom' => 'required',
+                    'dateTo' => 'required'
+                ]
+            );
+
             $dateFrom = $request->input('dateFrom');
             $dateTo = $request->input('dateTo');
             $data['rooms'] = $room->getAvailableRooms($dateFrom, $dateTo);
