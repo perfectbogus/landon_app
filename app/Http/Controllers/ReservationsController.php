@@ -12,6 +12,7 @@ class ReservationsController extends Controller
     //
     public function bookRoom($client_id, $room_id, $date_in, $date_out)
     {
+
         $reservation = new Reservation();
         $client_instance = new Client();
         $room_instance = new Room();
@@ -23,7 +24,11 @@ class ReservationsController extends Controller
 
         $reservation->room()->associate($room);
         $reservation->client()->associate($client);
+        if ($room_instance->isRoomBooked($room_id, $date_in, $date_out)) {
+            abort(405, 'Trying to book an already bokked room');
+        }
         $reservation->save();
+
 
         return redirect()->route('clients');
     }

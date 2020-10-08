@@ -51,7 +51,7 @@
                                     'client_id' => $client->id,
                                     'room_id' => $room->id,
                                     'date_in' => $dateFrom,
-                                    'date_out' => $dateTo
+                                    'date_out' => $dateTo,
                                     ]
                                 )
                                 }}">BOOK NOW</a>
