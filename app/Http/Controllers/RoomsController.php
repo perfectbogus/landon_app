@@ -11,16 +11,22 @@ class RoomsController extends Controller
     //
     public function checkAvailableRooms($client_id, Request $request)
     {
-        $dateFrom = date('Y/m/d');
-        $dateTo = date('Y/m/d');
+        $data = [];
         $client = new Client();
         $room = new Room();
 
-        $data = [];
-        //$data['dateFrom'] = $dateFrom;
+        if( $request->isMethod('get')){
+            $dateFrom = '';
+            $dateTo = '';
+            $data['rooms'] = [];
+        } else {
+            $dateFrom = $request->input('dateFrom');
+            $dateTo = $request->input('dateTo');
+            $data['rooms'] = $room->getAvailableRooms($dateFrom, $dateTo);
+        }
+
         $data['dateFrom'] = $dateFrom;
         $data['dateTo'] = $dateTo;
-        $data['rooms'] = $room->getAvailableRooms($dateFrom, $dateTo);
         $data['client'] = $client->find($client_id);
 
         return view('rooms/checkAvailableRooms', $data);
